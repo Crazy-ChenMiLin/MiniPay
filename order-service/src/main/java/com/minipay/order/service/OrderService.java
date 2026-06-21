@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -19,13 +20,11 @@ import java.util.UUID;
 public class OrderService {
     private static final Logger LOG = LoggerFactory.getLogger(OrderService.class);
 
-    // 允许的状态值
     private static final Set<String> VALID_STATUSES = new HashSet<>(Arrays.asList("PENDING", "PAID", "FAILED"));
 
     @Resource
     private OrderMapper orderMapper;
 
-    // 创建订单
     public Order createOrder(BigDecimal amount, String description) {
         Order order = new Order();
         order.setOrderId(UUID.randomUUID().toString().replace("-", ""));
@@ -39,7 +38,6 @@ public class OrderService {
         return order;
     }
 
-    // 查询订单
     public Order getOrder(String orderId) {
         LOG.info("查询订单, orderId: {}", orderId);
         LambdaQueryWrapper<Order> wrapper = new LambdaQueryWrapper<>();
@@ -47,7 +45,13 @@ public class OrderService {
         return orderMapper.selectOne(wrapper);
     }
 
-    // 更新订单状态
+    public List<Order> getOrderList() {
+        LOG.info("查询所有订单");
+        LambdaQueryWrapper<Order> wrapper = new LambdaQueryWrapper<>();
+        wrapper.orderByDesc(Order::getCreatedAt);
+        return orderMapper.selectList(wrapper);
+    }
+
     public Order updateOrderStatus(String orderId, String status) {
         LOG.info("更新订单状态, orderId: {}, status: {}", orderId, status);
         if (!VALID_STATUSES.contains(status)) {
@@ -65,7 +69,6 @@ public class OrderService {
         return order;
     }
 
-    // 订单服务健康检查
     public String health() {
         LOG.info("订单服务健康检查");
         return "order-service is running";

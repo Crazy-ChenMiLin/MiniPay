@@ -1,14 +1,14 @@
 package com.minipay.common.req;
 
-public class OrderReq {
-    private Long orderId;
+public class PaymentReq {
+    private String orderId;
     private Long amount;
 
-    public Long getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Long orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
@@ -22,8 +22,8 @@ public class OrderReq {
 
     @Override
     public String toString() {
-        return "OrderReq{" +
-                "orderId=" + orderId +
+        return "PaymentReq{" +
+                "orderId='" + orderId + '\'' +
                 ", amount=" + amount +
                 '}';
     }

@@ -8,6 +8,7 @@ import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -21,6 +22,12 @@ public class OrderController {
     public CommonResp<Order> createOrder(@RequestBody OrderReq req) {
         Order order = orderService.createOrder(BigDecimal.valueOf(req.getAmount()), "");
         return new CommonResp<>(200, "创建成功", order, true);
+    }
+
+    @GetMapping
+    public CommonResp<List<Order>> getOrderList() {
+        List<Order> orders = orderService.getOrderList();
+        return new CommonResp<>(200, "查询成功", orders, true);
     }
 
     @GetMapping("/{orderId}")
