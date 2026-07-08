@@ -264,7 +264,7 @@ h2 {
   color: #333;
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
-  border-bottom: 2px solid #667eea;
+  border-bottom: 2px solid #FFB800;
   padding-bottom: 0.5rem;
 }
 
@@ -303,7 +303,7 @@ h2 {
 }
 
 .status.paid {
-  color: #27ae60;
+  color: #FF69B4;
 }
 
 .status.failed {
@@ -317,7 +317,7 @@ h2 {
 .pay-btn {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  background: linear-gradient(135deg, #FF69B4 0%, #FF85C8 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -333,7 +333,7 @@ h2 {
 
 .pay-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
 }
 
 .pay-btn:disabled {
@@ -430,13 +430,13 @@ h2 {
 
 .payment-form input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #FFB800;
 }
 
 .confirm-btn {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  background: linear-gradient(135deg, #FF69B4 0%, #FF85C8 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -469,8 +469,8 @@ h2 {
 }
 
 .result-card.success {
-  background: #d4edda;
-  border: 1px solid #c3e6cb;
+  background: #FFE4F0;
+  border: 1px solid #FFC0D8;
 }
 
 .result-card.failed {
@@ -490,7 +490,7 @@ h2 {
 }
 
 .result-card.success .result-icon {
-  background: #27ae60;
+  background: #FF69B4;
   color: white;
 }
 
@@ -536,12 +536,12 @@ h2 {
 }
 
 .query-btn {
-  background: #667eea;
+  background: #FFB800;
   color: white;
 }
 
 .query-btn:hover {
-  background: #5a67d8;
+  background: #E6A800;
 }
 
 .error-message {
@@ -561,7 +561,7 @@ h2 {
 .loading-container .loading {
   width: 40px;
   height: 40px;
-  border: 3px solid #667eea;
+  border: 3px solid #FFB800;
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;

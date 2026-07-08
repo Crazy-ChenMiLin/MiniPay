@@ -29,7 +29,7 @@ export default {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
   background: #f5f5f5;
   color: #333;
 }
@@ -39,7 +39,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #FFB800 0%, #FF69B4 100%);
   color: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
@@ -70,7 +70,7 @@ body {
 
 .main-content {
   padding: 2rem;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 </style>

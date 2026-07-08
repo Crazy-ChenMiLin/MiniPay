@@ -151,7 +151,7 @@ h2 {
   color: #333;
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
-  border-bottom: 2px solid #667eea;
+  border-bottom: 2px solid #FFB800;
   padding-bottom: 0.5rem;
 }
 
@@ -177,7 +177,7 @@ h2 {
 
 .form-group input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #FFB800;
 }
 
 .form-group input:disabled {
@@ -195,7 +195,7 @@ h2 {
 .submit-btn {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #FFB800 0%, #FF69B4 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -211,7 +211,7 @@ h2 {
 
 .submit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 184, 0, 0.4);
 }
 
 .submit-btn:disabled {
@@ -235,10 +235,10 @@ h2 {
 .success-message {
   margin-top: 1rem;
   padding: 1rem;
-  background: #d4edda;
-  border: 1px solid #c3e6cb;
+  background: #FFE4F0;
+  border: 1px solid #FFC0D8;
   border-radius: 8px;
-  color: #155724;
+  color: #8B0045;
 }
 
 .success-message p {
@@ -246,7 +246,7 @@ h2 {
 }
 
 .pay-btn {
-  background: #28a745;
+  background: #FF69B4;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -257,7 +257,7 @@ h2 {
 }
 
 .pay-btn:hover {
-  background: #218838;
+  background: #FF52A3;
 }
 
 .error-message {

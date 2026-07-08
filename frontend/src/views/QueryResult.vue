@@ -308,18 +308,18 @@ export default {
 </script>
 
 <style scoped>
-.container { padding: 2rem; }
+.container { padding: 1rem; }
 .card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-h2 { color: #333; margin-bottom: 1.5rem; font-size: 1.5rem; border-bottom: 2px solid #667eea; padding-bottom: 0.5rem; }
+h2 { color: #333; margin-bottom: 1.5rem; font-size: 1.5rem; border-bottom: 2px solid #FFB800; padding-bottom: 0.5rem; }
 .form-group { margin-bottom: 1rem; }
 .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #555; }
 .form-group input { width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s; }
-.form-group input:focus { outline: none; border-color: #667eea; }
+.form-group input:focus { outline: none; border-color: #FFB800; }
 .form-group input:disabled { background: #f5f5f5; cursor: not-allowed; }
 .error { display: block; color: #e74c3c; font-size: 0.875rem; margin-top: 0.25rem; }
 
-.query-btn { width: 100%; padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-.query-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+.query-btn { width: 100%; padding: 1rem; background: linear-gradient(135deg, #FFB800 0%, #FF69B4 100%); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.query-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255, 184, 0, 0.4); }
 .query-btn:disabled { opacity: 0.7; cursor: not-allowed; }
 .loading { width: 20px; height: 20px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -335,14 +335,14 @@ h2 { color: #333; margin-bottom: 1.5rem; font-size: 1.5rem; border-bottom: 2px s
 .info-item .value { display: block; color: #333; font-weight: 600; }
 
 .status.pending { color: #f39c12; }
-.status.paid, .status.success { color: #27ae60; }
+.status.paid, .status.success { color: #FF69B4; }
 .status.failed { color: #e74c3c; }
 
 .action-section { margin-top: 1.5rem; text-align: center; }
-.pay-btn { padding: 0.75rem 2rem; background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s; }
-.pay-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4); }
+.pay-btn { padding: 0.75rem 2rem; background: linear-gradient(135deg, #FF69B4 0%, #FF85C8 100%); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.2s; }
+.pay-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4); }
 
-.success-tip { margin-top: 1.5rem; padding: 1rem; text-align: center; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; color: #155724; font-weight: 600; font-size: 1.1rem; }
+.success-tip { margin-top: 1.5rem; padding: 1rem; text-align: center; background: #FFE4F0; border: 1px solid #FFC0D8; border-radius: 8px; color: #8B0045; font-weight: 600; font-size: 1.1rem; }
 .error-message { margin-top: 1rem; padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 8px; color: #721c24; }
 .no-result { margin-top: 2rem; padding: 2rem; text-align: center; background: #f9f9f9; border-radius: 8px; }
 .no-result p { color: #666; margin: 0; }
@@ -358,14 +358,14 @@ h2 { color: #333; margin-bottom: 1.5rem; font-size: 1.5rem; border-bottom: 2px s
 .table-wrapper { overflow-x: auto; }
 .history-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 .history-table th, .history-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #eee; }
-.history-table th { background: #f9f9f9; color: #555; font-weight: 600; }
+.history-table th { background: #f9f9f9; color: #555; font-weight: 600; white-space: nowrap; }
 .history-table tr:hover { background: #fafafa; }
 
-.status-tag { padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
-.status-tag.pending { background: #fff3cd; color: #856404; }
-.status-tag.paid { background: #d4edda; color: #155724; }
+.status-tag { padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600; display: inline-block; white-space: nowrap; }
+.status-tag.pending { background: #FFF3B0; color: #B8860B; }
+.status-tag.paid { background: #FFE4F0; color: #8B0045; }
 .status-tag.failed { background: #f8d7da; color: #721c24; }
 
-.detail-btn { padding: 0.3rem 0.8rem; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; transition: background 0.2s; }
-.detail-btn:hover { background: #5a6fd6; }
+.detail-btn { padding: 0.4rem 1rem; background: #FFB800; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; transition: background 0.2s; white-space: nowrap; }
+.detail-btn:hover { background: #E6A800; }
 </style>
