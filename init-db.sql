@@ -24,6 +24,3 @@ CREATE TABLE IF NOT EXISTS payments (
     paid_at DATETIME,
     created_at DATETIME
 );
-
--- 创建 Nacos 数据库
-CREATE DATABASE IF NOT EXISTS nacos_config;
