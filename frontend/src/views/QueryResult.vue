@@ -334,8 +334,8 @@ h2 { color: #333; margin-bottom: 1.5rem; font-size: 1.5rem; border-bottom: 2px s
 .info-item .label { display: block; color: #666; font-size: 0.875rem; margin-bottom: 0.25rem; }
 .info-item .value { display: block; color: #333; font-weight: 600; }
 
-.status.pending { color: #f39c12; }
-.status.paid, .status.success { color: #FF69B4; }
+.status.pending { color: #E6A800; }
+.status.paid, .status.success { color: #2ecc71; }
 .status.failed { color: #e74c3c; }
 
 .action-section { margin-top: 1.5rem; text-align: center; }
@@ -363,8 +363,8 @@ h2 { color: #333; margin-bottom: 1.5rem; font-size: 1.5rem; border-bottom: 2px s
 
 .status-tag { padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.8rem; font-weight: 600; display: inline-block; white-space: nowrap; }
 .status-tag.pending { background: #FFF3B0; color: #B8860B; }
-.status-tag.paid { background: #FFE4F0; color: #8B0045; }
-.status-tag.failed { background: #f8d7da; color: #721c24; }
+.status-tag.paid { background: #E8F8F0; color: #1a9c5a; }
+.status-tag.failed { background: #FFE8E8; color: #d63031; }
 
 .detail-btn { padding: 0.4rem 1rem; background: #FFB800; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; transition: background 0.2s; white-space: nowrap; }
 .detail-btn:hover { background: #E6A800; }
