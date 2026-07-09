@@ -1,13 +1,12 @@
 <template>
   <div id="app">
     <nav class="navbar">
-      <div class="navbar-brand">
+      <router-link to="/" class="navbar-brand">
         <h1>MiniPay</h1>
-      </div>
-      <div class="navbar-nav">
-        <router-link to="/" :class="{ active: $route.name === 'CreateOrder' }">创建订单</router-link>
-        <router-link to="/query" :class="{ active: $route.name === 'QueryResult' }">结果查询</router-link>
-      </div>
+      </router-link>
+      <router-link v-if="$route.name !== 'Home'" to="/" class="back-home">
+        ← 返回首页
+      </router-link>
     </nav>
     <main class="main-content">
       <router-view />
@@ -44,17 +43,17 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.navbar-brand {
+  text-decoration: none;
+  color: white;
+}
+
 .navbar-brand h1 {
   font-size: 1.5rem;
   font-weight: 600;
 }
 
-.navbar-nav {
-  display: flex;
-  gap: 2rem;
-}
-
-.navbar-nav a {
+.back-home {
   color: white;
   text-decoration: none;
   font-weight: 500;
@@ -63,8 +62,7 @@ body {
   transition: background 0.3s;
 }
 
-.navbar-nav a:hover,
-.navbar-nav a.active {
+.back-home:hover {
   background: rgba(255,255,255,0.2);
 }
 

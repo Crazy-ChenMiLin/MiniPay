@@ -1,53 +1,82 @@
 <template>
   <div class="container">
-    <div class="card">
-      <h2>创建订单</h2>
-      <form @submit.prevent="handleSubmit">
-        <div class="form-group">
-          <label for="amount">订单金额（元）</label>
-          <input
-            id="amount"
-            v-model.number="form.amount"
-            type="number"
-            step="0.01"
-            min="0.01"
-            placeholder="请输入订单金额"
-            :disabled="loading"
-          />
-          <span v-if="errors.amount" class="error">{{ errors.amount }}</span>
-        </div>
-        <div class="form-group">
-          <label for="memberId">商户ID</label>
-          <input
-            id="memberId"
-            v-model.number="form.memberId"
-            type="number"
-            min="1"
-            placeholder="请输入商户ID"
-            :disabled="loading"
-          />
-          <span v-if="errors.memberId" class="error">{{ errors.memberId }}</span>
-        </div>
-        <div class="form-group">
-          <label for="description">订单描述</label>
-          <input
-            id="description"
-            v-model="form.description"
-            type="text"
-            placeholder="请输入订单描述（可选）"
-            :disabled="loading"
-          />
-        </div>
-        <button type="submit" :disabled="loading" class="submit-btn">
-          <span v-if="loading" class="loading"></span>
-          {{ loading ? '创建中...' : '创建订单' }}
-        </button>
-      </form>
-      <div v-if="successMessage" class="success-message">
-        <p>{{ successMessage }}</p>
-        <button @click="goToPay" class="pay-btn">立即支付</button>
+    <div class="pay-card">
+      <!-- 顶部金额区域 -->
+      <div class="amount-section">
+        <span class="yen">¥</span>
+        <input
+          v-model.number="form.amount"
+          type="number"
+          step="0.01"
+          min="0.01"
+          placeholder="0.00"
+          :disabled="loading"
+          class="amount-input"
+        />
+        <span v-if="errors.amount" class="error-tip">{{ errors.amount }}</span>
+        <span class="amount-label">订单金额（元）</span>
       </div>
-      <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+      <div class="divider"></div>
+
+      <!-- 商户ID行 -->
+      <div class="info-row">
+        <div class="row-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </div>
+        <span class="row-label">商户ID</span>
+        <input
+          v-model.number="form.memberId"
+          type="number"
+          min="1"
+          placeholder="请输入商户ID"
+          :disabled="loading"
+          class="row-input"
+        />
+        <span v-if="errors.memberId" class="error-tip">{{ errors.memberId }}</span>
+      </div>
+
+      <!-- 订单描述行 -->
+      <div class="info-row">
+        <div class="row-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+          </svg>
+        </div>
+        <span class="row-label">订单描述</span>
+        <input
+          v-model="form.description"
+          type="text"
+          placeholder="请输入订单描述（可选）"
+          :disabled="loading"
+          class="row-input"
+        />
+      </div>
+
+      <!-- 底部按钮 -->
+      <button @click="handleSubmit" :disabled="loading" class="confirm-btn">
+        <span v-if="loading" class="loading"></span>
+        {{ loading ? '创建中...' : '创建订单' }}
+      </button>
+    </div>
+
+    <!-- 创建成功弹窗 -->
+    <div v-if="successMessage" class="result-card success">
+      <div class="result-icon">✓</div>
+      <p class="result-title">订单创建成功</p>
+      <p class="result-order">订单号：{{ createdOrderId }}</p>
+      <button @click="goToPay" class="go-pay-btn">立即支付 →</button>
+    </div>
+
+    <!-- 错误提示 -->
+    <div v-if="errorMessage" class="result-card error">
+      <p>{{ errorMessage }}</p>
     </div>
   </div>
 </template>
@@ -137,91 +166,158 @@ export default {
 
 <style scoped>
 .container {
-  padding: 2rem;
+  padding: 1rem;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
-.card {
+.pay-card {
   background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
 }
 
-h2 {
+/* ---- 金额区域 ---- */
+.amount-section {
+  display: flex;
+  align-items: baseline;
+  padding: 2.5rem 2rem 1.5rem;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.yen {
+  font-size: 2rem;
+  font-weight: 700;
   color: #333;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  border-bottom: 2px solid #FFB800;
-  padding-bottom: 0.5rem;
+  margin-right: 0.25rem;
 }
 
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #555;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
-}
-
-.form-group input:focus {
+.amount-input {
+  flex: 1;
+  border: none;
   outline: none;
-  border-color: #FFB800;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  background: transparent;
+  min-width: 0;
 }
 
-.form-group input:disabled {
-  background: #f5f5f5;
-  cursor: not-allowed;
+.amount-input::placeholder {
+  color: #ccc;
 }
 
-.error {
-  display: block;
+.amount-input::-webkit-outer-spin-button,
+.amount-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.amount-input[type="number"] { -moz-appearance: textfield; }
+
+.error-tip {
+  width: 100%;
   color: #e74c3c;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   margin-top: 0.25rem;
 }
 
-.submit-btn {
+.amount-label {
   width: 100%;
-  padding: 1rem;
-  background: linear-gradient(135deg, #FFB800 0%, #FF69B4 100%);
-  color: white;
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 0.5rem;
+}
+
+/* ---- 分割线 ---- */
+.divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 0 2rem;
+}
+
+/* ---- 信息行 ---- */
+.info-row {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 0.75rem;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.row-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #FFF8E1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFB800;
+  flex-shrink: 0;
+}
+
+.row-label {
+  font-size: 0.95rem;
+  color: #666;
+  white-space: nowrap;
+  min-width: 5em;
+}
+
+.row-input {
+  flex: 1;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  outline: none;
+  font-size: 0.95rem;
+  color: #333;
+  text-align: right;
+  background: transparent;
+  min-width: 0;
+}
+
+.row-input::placeholder {
+  color: #bbb;
+}
+
+.row-input::-webkit-outer-spin-button,
+.row-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.row-input[type="number"] { -moz-appearance: textfield; }
+
+/* ---- 确认按钮 ---- */
+.confirm-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  width: calc(100% - 3rem);
+  margin: 1.5rem auto 2rem;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #FFB800 0%, #FF69B4 100%);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.submit-btn:hover:not(:disabled) {
+.confirm-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 184, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(255, 105, 180, 0.35);
 }
 
-.submit-btn:disabled {
-  opacity: 0.7;
+.confirm-btn:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
 .loading {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border: 2px solid #fff;
   border-top-color: transparent;
   border-radius: 50%;
@@ -232,40 +328,70 @@ h2 {
   to { transform: rotate(360deg); }
 }
 
-.success-message {
+/* ---- 结果卡片 ---- */
+.result-card {
   margin-top: 1rem;
-  padding: 1rem;
-  background: #FFE4F0;
-  border: 1px solid #FFC0D8;
-  border-radius: 8px;
-  color: #8B0045;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
 }
 
-.success-message p {
-  margin-bottom: 0.75rem;
+.result-card.success {
+  background: white;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
 }
 
-.pay-btn {
-  background: #FF69B4;
+.result-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FFB800, #FF69B4);
   color: white;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+}
+
+.result-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.result-order {
+  font-size: 0.8rem;
+  color: #999;
+  word-break: break-all;
+  margin-bottom: 1rem;
+}
+
+.go-pay-btn {
+  padding: 0.7rem 2.5rem;
   border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 500;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #FF69B4 0%, #FF85C8 100%);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.pay-btn:hover {
-  background: #FF52A3;
+.go-pay-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 105, 180, 0.35);
 }
 
-.error-message {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: #f8d7da;
+.result-card.error {
+  background: #fff5f5;
   border: 1px solid #f5c6cb;
-  border-radius: 8px;
-  color: #721c24;
+}
+
+.result-card.error p {
+  color: #c0392b;
+  margin: 0;
 }
 </style>
